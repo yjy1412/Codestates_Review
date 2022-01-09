@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+h1 {
+  border: 1px solid red;
+  background: gray;
+  width: 60%;
+}
+
+/*
+Todo:  margin 속성값 적용순서(top, right, bottom, left)
+*/
+p {
+  background: rgba(255,84,104,0.3);
+  width: 80%;
+  height: 50px;
+  margin: 10px 20px 30px 40px;
+  overflow: auto;
+}
+/*
+Todo: span tag는 inline tag이기에 width, height 속성이 적용되지 않는다.
+*/
+span {
+  background: yellow;
+  width: 100px;
+  height: 100px;
+}

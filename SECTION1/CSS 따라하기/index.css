@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #4a4a4a;
+}
+header, footer {
+  font-size: large;
+  text-align: center;
+  padding: 0.3em 0;
+  background-color: #4a4a4a;
+  color: #ffffff;
+}
+nav {
+  background: #eee;
+}
+#navigation-title {
+  color: red;
+}
+.menu-item {
+  text-decoration: underline;
+}
+main {
+  font-family: 'The Nautigal', cursive;
+  background: #f9f9f9;
+}
+aside {
+  background: #eee;
+}
+.selected {
+  font-weight: bold;
+  color: #009999;
+}

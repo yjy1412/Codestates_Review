@@ -39,7 +39,7 @@ buttons.addEventListener('click', function (event) {
       // 그리고 버튼의 클레스가 number이면
       // 아래 코드가 작동됩니다.
       console.log('숫자 ' + buttonContent + ' 버튼');
-      if ( firstOperend.textContent === '0' ) {
+      if (firstOperend.textContent === '0') {
         firstOperend.textContent = buttonContent;
       } else {
         secondOperend.textContent = buttonContent;
@@ -89,47 +89,101 @@ buttons.addEventListener('click', function (event) {
   // ! 여기서부터 Advanced Challenge & Nightmare 과제룰 풀어주세요.
   if (target.matches('button')) {
     if (action === 'number') {
-      if ( previousKey === undefined ) {
+      if (previousKey === undefined) {
         display.textContent = buttonContent;
         previousNum = buttonContent;
         previousKey = 'number';
-      } else if ( previousKey === 'number' ) {
+      } else if (previousKey === 'number') {
         display.textContent = previousNum + buttonContent;
         previousNum = display.textContent;
         previousKey = 'number';
-      } else if ( previousKey === 'operator' ) {
+      } else if (previousKey === 'operator') {
         display.textContent = buttonContent;
         previousNum = buttonContent;
         previousKey = 'number';
+      } else if (previousKey === 'decimal') {
+        display.textContent = previousNum + buttonContent;
+        previousNum = display.textContent;
+        previousKey = 'number';
       }
     }
-    if (action === 'operator') { 
-      firstNum = Number(previousNum);
-      operatorForAdvanced = buttonContent;
-      previousKey = 'operator';
-    }
-    if (action === 'decimal') { 
+    if (action === 'operator') {
+      if ( previousKey === 'operator' ) {
+        operatorForAdvanced = buttonContent;
+        previousKey = 'operator';
+      } else if ( previousKey !== 'calculate' && operatorForAdvanced !== undefined ) {
+        firstNum = Number(firstNum);
+        secondNum = Number(previousNum);
 
+        if (operatorForAdvanced === '+') {
+          display.textContent = firstNum + secondNum;
+          firstNum = display.textContent;
+          operatorForAdvanced = buttonContent;
+          previousKey = 'operator'
+        } else if (operatorForAdvanced === '-') {
+          display.textContent = firstNum - secondNum;
+          firstNum = display.textContent;
+          operatorForAdvanced = buttonContent;
+          previousKey = 'operator'
+        } else if (operatorForAdvanced === '*') {
+          display.textContent = firstNum * secondNum;
+          firstNum = display.textContent;
+          operatorForAdvanced = buttonContent;
+          previousKey = 'operator'
+        } else if (operatorForAdvanced === '/') {
+          display.textContent = firstNum / secondNum;
+          firstNum = display.textContent;
+          operatorForAdvanced = buttonContent;
+          previousKey = 'operator'
+        }
+      } else {
+        firstNum = Number(previousNum);
+        operatorForAdvanced = buttonContent;
+        previousKey = 'operator';
+      }
     }
-    if (action === 'clear') { 
+    if (action === 'decimal') {
+      if (previousKey === undefined) {
+        display.textContent = '0.';
+        previousNum = display.textContent;
+        previousKey = 'decimal';
+      } else if (previousKey === 'number') {
+        display.textContent = previousNum + buttonContent;
+        previousNum = display.textContent;
+        previousKey = 'decimal';
+      } else if (previousKey === 'operator') {
+        display.textContent = '0.';
+        previousNum = display.textContent;
+        previousKey = 'decimal';
+      }
+    }
+    if (action === 'clear') {
       firstNum = undefined;
       operatorForAdvanced = undefined;
       previousKey = undefined;
       previousNum = undefined;
       display.textContent = '0';
     }
-    if (action === 'calculate') { 
+    if (action === 'calculate') {
       firstNum = Number(firstNum);
-      const secondNum = Number(display.textContent);
+      secondNum = Number(previousNum);
 
-      if ( operatorForAdvanced === '+' ) {
+      if (operatorForAdvanced === '+') {
         display.textContent = firstNum + secondNum;
-      } else if ( operatorForAdvanced === '-' ) {
+        firstNum = String(display.textContent);
+        previousKey = 'calculate'
+      } else if (operatorForAdvanced === '-') {
         display.textContent = firstNum - secondNum;
-      } else if ( operatorForAdvanced === '*' ) {
+        firstNum = String(display.textContent);
+        previousKey = 'calculate'
+      } else if (operatorForAdvanced === '*') {
         display.textContent = firstNum * secondNum;
-      } else if ( operatorForAdvanced === '/' ) {
+        firstNum = String(display.textContent);
+        previousKey = 'calculate'
+      } else if (operatorForAdvanced === '/') {
         display.textContent = firstNum / secondNum;
+        firstNum = String(display.textContent);
+        previousKey = 'calculate'
       }
     }
   }

@@ -74,9 +74,7 @@ buttons.addEventListener('click', function (event) {
   }
 });
 
-
 // ! Advanced Challenge test와 Nightmare test를 위해서는 아래 주석을 해제하세요.
-
 const display = document.querySelector('.calculator__display--for-advanced'); // calculator__display 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
 let firstNum, operatorForAdvanced, previousKey, previousNum;
 
@@ -90,11 +88,50 @@ buttons.addEventListener('click', function (event) {
 
   // ! 여기서부터 Advanced Challenge & Nightmare 과제룰 풀어주세요.
   if (target.matches('button')) {
-    if (action === 'number') { }
-    if (action === 'operator') { }
-    if (action === 'decimal') { }
-    if (action === 'clear') { }
-    if (action === 'calculate') { }
+    if (action === 'number') {
+      if ( previousKey === undefined ) {
+        display.textContent = buttonContent;
+        previousNum = buttonContent;
+        previousKey = 'number';
+      } else if ( previousKey === 'number' ) {
+        display.textContent = previousNum + buttonContent;
+        previousNum = display.textContent;
+        previousKey = 'number';
+      } else if ( previousKey === 'operator' ) {
+        display.textContent = buttonContent;
+        previousNum = buttonContent;
+        previousKey = 'number';
+      }
+    }
+    if (action === 'operator') { 
+      firstNum = Number(previousNum);
+      operatorForAdvanced = buttonContent;
+      previousKey = 'operator';
+    }
+    if (action === 'decimal') { 
+
+    }
+    if (action === 'clear') { 
+      firstNum = undefined;
+      operatorForAdvanced = undefined;
+      previousKey = undefined;
+      previousNum = undefined;
+      display.textContent = '0';
+    }
+    if (action === 'calculate') { 
+      firstNum = Number(firstNum);
+      const secondNum = Number(display.textContent);
+
+      if ( operatorForAdvanced === '+' ) {
+        display.textContent = firstNum + secondNum;
+      } else if ( operatorForAdvanced === '-' ) {
+        display.textContent = firstNum - secondNum;
+      } else if ( operatorForAdvanced === '*' ) {
+        display.textContent = firstNum * secondNum;
+      } else if ( operatorForAdvanced === '/' ) {
+        display.textContent = firstNum / secondNum;
+      }
+    }
   }
 
 });

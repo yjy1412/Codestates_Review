@@ -5,6 +5,7 @@ const firstOperend = document.querySelector('.calculator__operend--left'); // ca
 const operator = document.querySelector('.calculator__operator'); // calculator__operator 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
 const secondOperend = document.querySelector('.calculator__operend--right'); // calculator__operend--right 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
 const calculatedResult = document.querySelector('.calculator__result'); // calculator__result 엘리먼트와, 그 자식 엘리먼트의 정보를 모두 담고 있습니다.
+let isOperated = false;
 
 function calculate(n1, operator, n2) {
   let result = 0;
@@ -39,16 +40,17 @@ buttons.addEventListener('click', function (event) {
       // 그리고 버튼의 클레스가 number이면
       // 아래 코드가 작동됩니다.
       console.log('숫자 ' + buttonContent + ' 버튼');
-      if (firstOperend.textContent === '0') {
-        firstOperend.textContent = buttonContent;
-      } else {
+      if ( isOperated ) {
         secondOperend.textContent = buttonContent;
+      } else {
+        firstOperend.textContent = buttonContent;
       }
     }
 
     if (action === 'operator') {
       console.log('연산자 ' + buttonContent + ' 버튼');
       operator.textContent = buttonContent;
+      isOperated = true;
     }
 
     if (action === 'decimal') {
